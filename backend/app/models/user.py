@@ -33,4 +33,4 @@ class User(Base):
     is_verified = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    orders = relationship("Order", back_populates="customer")
+    orders = relationship("Order",back_populates="customer",foreign_keys="Order.customer_id")

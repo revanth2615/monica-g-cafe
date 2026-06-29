@@ -38,9 +38,10 @@ class Order(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    customer = relationship("User", back_populates="orders", foreign_keys=[customer_id])
-    items = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
-    bill = relationship("Bill", back_populates="order", uselist=False)
+    customer = relationship("User",back_populates="orders",foreign_keys=[customer_id])
+    created_by_staff = relationship("User",foreign_keys=[created_by_staff_id])
+    items = relationship("OrderItem",back_populates="order",cascade="all, delete-orphan")
+    bill = relationship("Bill",back_populates="order",uselist=False)
 
 
 class OrderItem(Base):
