@@ -1,55 +1,56 @@
-"""
-Sends emails via SMTP — used for OTP login codes and order/billing
-notifications. Wrapped in try/except so a flaky SMTP server doesn't
-crash the request; failures are logged instead.
-"""
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, Email, To, Content
 
-from app.config import settings
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
 
-
-def send_email(to_email: str, subject: str, html_body: str) -> bool:
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"] = f"{settings.SMTP_FROM_NAME} <{settings.SMTP_USER}>"
-    msg["To"] = to_email
-    msg.attach(MIMEText(html_body, "html"))
-
+def send_email(to_email: str, subject: str, body: str) -> bool:
+    """Send email using SendGrid"""
+    if not SENDGRID_API_KEY:
+        print("[email_service] SENDGRID_API_KEY not set")
+        return False
+    
     try:
-        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
-            server.starttls()
-            server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            server.sendmail(settings.SMTP_USER, [to_email], msg.as_string())
-        return True
-    except Exception as exc:  # noqa: BLE001
-        print(f"[email_service] Exception type: {type(exc).__name__}")
-        print(f"[email_service] Failed to send email to {to_email}: {exc}")
+        mail = Mail(
+            from_email=Email("noreply@monikacafe.com", "Monika G Cafe"),
+            to_emails=To(to_email),
+            subject=subject,
+            plain_text_content=body
+        )
+        
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(mail)
+        
+        print(f"[email_service] Email sent to {to_email}: {response.status_code}")
+        return response.status_code == 202
+    except Exception as e:
+        print(f"[email_service] Failed to send email: {e}")
         return False
 
-
 def send_otp_email(to_email: str, otp_code: str) -> bool:
-    subject = "Your Monika G Cafe login code"
+    """Send OTP email"""
+    subject = "Your Monika G Cafe Login Code"
     body = f"""
-    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
-        <h2 style="color:#6B3F1D;">Monika G Cafe</h2>
-        <p>Your one-time login code is:</p>
-        <p style="font-size: 28px; font-weight: bold; letter-spacing: 4px;">{otp_code}</p>
-        <p>This code expires in {settings.OTP_EXPIRE_MINUTES} minutes. If you didn't request this, you can ignore this email.</p>
-    </div>
-    """
+Your login code is: {otp_code}
+
+This code will expire in 5 minutes.
+Do not share this code with anyone.
+
+— Monika G Cafe
+"""
     return send_email(to_email, subject, body)
 
-
 def send_order_confirmation_email(to_email: str, order_id: int, total: float) -> bool:
-    subject = f"Order #{order_id} confirmed — Monika G Cafe"
+    """Send order confirmation email"""
+    subject = "Order Confirmation - Monika G Cafe"
     body = f"""
-    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
-        <h2 style="color:#6B3F1D;">Monika G Cafe</h2>
-        <p>Your order <strong>#{order_id}</strong> has been received.</p>
-        <p>Total: <strong>₹{total:.2f}</strong></p>
-        <p>We'll notify you when it's ready.</p>
-    </div>
-    """
+Your order has been placed!
+
+Order ID: {order_id}
+Total: ₹{total}
+
+Thank you for your order!
+
+— Monika G Cafe
+"""
     return send_email(to_email, subject, body)
