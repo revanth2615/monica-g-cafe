@@ -4,6 +4,8 @@ Monika G Cafe Management System — backend entrypoint.
 Run with:  uvicorn app.main:app --reload
 Docs at:   http://localhost:8000/docs
 """
+import socket
+from fastapi import APIRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -21,6 +23,18 @@ app = FastAPI(
     version="1.0.0",
 )
 
+router = APIRouter()
+
+@router.get("/test-smtp")
+def test_smtp():
+    try:
+        socket.create_connection(("smtp.gmail.com", 587), timeout=10)
+        return {"status": "Connected to Gmail SMTP"}
+    except Exception as e:
+        return {"status": "Failed", "error": str(e)}
+
+app.include_router(router)
+
 # Allow the frontend (served separately) to call this API from the browser.
 app.add_middleware(
     CORSMiddleware,
@@ -36,6 +50,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router)
 app.include_router(auth.router)
 app.include_router(menu.router)
 app.include_router(inventory.router)
