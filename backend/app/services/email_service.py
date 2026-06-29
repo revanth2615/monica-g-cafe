@@ -24,6 +24,7 @@ def send_email(to_email: str, subject: str, html_body: str) -> bool:
             server.sendmail(settings.SMTP_USER, [to_email], msg.as_string())
         return True
     except Exception as exc:  # noqa: BLE001
+        print(f"[email_service] Exception type: {type(exc).__name__}")
         print(f"[email_service] Failed to send email to {to_email}: {exc}")
         return False
 
