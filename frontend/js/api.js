@@ -13,7 +13,7 @@
  * http://localhost:8000.
  */
 const API = (() => {
-  const BASE_URL = window.MONIKA_API_BASE_URL || "http://localhost:8000";
+  const BASE_URL = window.MONIKA_API_BASE_URL || "https://monica-g-cafe.onrender.com";
 
   function getAccessToken() {
     return localStorage.getItem("mg_access_token");
