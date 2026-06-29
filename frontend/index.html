@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Monika G Cafe</title>
+</head>
+<body>
+<script src="js/api.js"></script>
+<script>
+  const user = API.getUser();
+  const token = API.getAccessToken();
+  if (user && token) {
+    const destinations = {admin: "dashboard.html", staff: "dashboard.html", kitchen: "kitchen.html", customer: "customer-menu.html"};
+    window.location.href = destinations[user.role] || "login.html";
+  } else {
+    window.location.href = "login.html";
+  }
+</script>
+</body>
+</html>

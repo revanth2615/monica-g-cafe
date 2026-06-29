@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body">
+<nav class="nav-bar"><div id="nav-root"></div></nav>
+<div class="page-content">
+  <div class="page-header-actions">
+    <div><h1>Employees</h1><p>Manage staff, kitchen, and attendance.</p></div>
+    <button class="btn btn-primary" onclick="openEmployeeModal()">+ Add Employee</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Name</th><th>Contact</th><th>Role</th><th>Designation</th><th>Salary</th><th>Joined</th><th>Attendance</th><th></th></tr></thead>
+      <tbody id="employees-body"><tr><td colspan="8" class="empty-state">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="employee-modal">
+  <div class="modal-card">
+    <h3>Add Employee</h3>
+    <div class="flex-col gap-3">
+      <div class="field"><label for="emp-name">Full Name</label><input type="text" id="emp-name" placeholder="Ravi Kumar"></div>
+      <div class="field"><label for="emp-email">Email</label><input type="email" id="emp-email" placeholder="ravi@example.com"></div>
+      <div class="field"><label for="emp-phone">Phone (+cc)</label><input type="tel" id="emp-phone" placeholder="+919876543210"></div>
+      <p class="hint">At least one of email or phone is required for login.</p>
+      <div class="field"><label for="emp-role">Role</label><select id="emp-role"><option value="staff">Staff / Cashier</option><option value="kitchen">Kitchen</option></select></div>
+      <div class="field"><label for="emp-designation">Designation</label><input type="text" id="emp-designation" value="Staff"></div>
+      <div class="field"><label for="emp-salary">Salary (₹)</label><input type="number" id="emp-salary" value="0" step="500"></div>
+      <div class="field"><label for="emp-shift">Shift</label><input type="text" id="emp-shift" placeholder="Morning 8am-4pm"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeEmployeeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEmployee()">Add</button>
+    </div>
+  </div>
+</div>
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/employees.js"></script>
+</body>
+</html>

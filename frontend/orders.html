@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orders — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body">
+<nav class="nav-bar"><div id="nav-root"></div></nav>
+<div class="page-content">
+  <div class="page-header-actions">
+    <div><h1>Orders</h1><p>Manage and track all café orders.</p></div>
+    <button class="btn btn-primary" onclick="openNewOrderModal()">+ New Order</button>
+  </div>
+  <div class="section-toolbar">
+    <div class="flex gap-2">
+      <button class="btn btn-secondary btn-sm" onclick="filterOrders(null)">All</button>
+      <button class="btn btn-secondary btn-sm" onclick="filterOrders('pending')">Pending</button>
+      <button class="btn btn-secondary btn-sm" onclick="filterOrders('preparing')">Preparing</button>
+      <button class="btn btn-secondary btn-sm" onclick="filterOrders('ready')">Ready</button>
+      <button class="btn btn-secondary btn-sm" onclick="filterOrders('served')">Served</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Table</th><th>Type</th><th>Items</th><th>Total</th><th>Status</th><th>Time</th><th></th></tr></thead>
+      <tbody id="orders-body"><tr><td colspan="8" class="empty-state">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="order-modal">
+  <div class="modal-card" style="max-width:560px">
+    <h3>Create New Order</h3>
+    <div class="flex-col gap-3">
+      <div class="field"><label for="order-table">Table Number</label><input type="text" id="order-table" placeholder="e.g. 12"></div>
+      <div class="field"><label for="order-type">Type</label><select id="order-type"><option value="dine_in">Dine In</option><option value="takeaway">Takeaway</option><option value="delivery">Delivery</option></select></div>
+      <div class="field"><label>Items</label><div id="order-items-builder" class="flex-col gap-2" style="max-height:240px; overflow-y:auto; border:1px solid var(--color-border); border-radius:8px; padding:10px"></div></div>
+      <div class="field"><label for="order-notes">Special Notes</label><input type="text" id="order-notes" placeholder="e.g. No sugar"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeNewOrderModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitNewOrder()">Place Order</button>
+    </div>
+  </div>
+</div>
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/orders.js"></script>
+</body>
+</html>

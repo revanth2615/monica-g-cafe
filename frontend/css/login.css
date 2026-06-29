@@ -1,0 +1,232 @@
+/* Login Page — Premium Café Aesthetic */
+
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: linear-gradient(135deg, var(--color-bg) 0%, #F5F0E8 100%);
+}
+
+/* Decorative background elements */
+.login-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(212, 165, 116, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-8) var(--space-7);
+  backdrop-filter: blur(10px);
+}
+
+/* Brand Section */
+.login-brand {
+  text-align: center;
+  margin-bottom: var(--space-7);
+}
+
+.login-brand .mark {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.login-brand .tagline {
+  font-size: 0.9rem;
+  color: var(--color-text-sec);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Tab Switcher */
+.login-tabs {
+  display: flex;
+  background: var(--color-divider);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: var(--space-6);
+  gap: 2px;
+}
+
+.login-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-sec);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.login-tab:hover {
+  color: var(--color-text);
+}
+
+.login-tab.active {
+  background: var(--color-surface);
+  color: var(--color-copper);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Form Panels */
+.login-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.otp-step-label {
+  font-size: 0.85rem;
+  color: var(--color-text-sec);
+  font-weight: 500;
+  margin-bottom: var(--space-1);
+}
+
+/* OTP Input Row */
+.otp-input-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.otp-input-row input {
+  flex: 1;
+  text-align: center;
+  font-size: 1.8rem;
+  letter-spacing: 0.2em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 12px 8px !important;
+  border: 1.5px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--color-divider) !important;
+  color: var(--color-text) !important;
+}
+
+.otp-input-row input:focus {
+  background: var(--color-surface) !important;
+  border-color: var(--color-copper) !important;
+}
+
+/* OTP Meta Row */
+.otp-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  gap: var(--space-3);
+}
+
+.otp-meta-row .link-btn {
+  background: none;
+  border: none;
+  color: var(--color-copper);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.otp-meta-row .link-btn:hover {
+  color: var(--color-copper-dark);
+  text-decoration: underline;
+}
+
+.otp-meta-row .link-btn:disabled {
+  color: var(--color-text-hint);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.otp-countdown {
+  color: var(--color-text-hint);
+  font-size: 0.78rem;
+}
+
+/* Divider */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+  color: var(--color-text-hint);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Google Button Container */
+#google-signin-button {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-3) 0;
+}
+
+/* Footer */
+.login-footnote {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-hint);
+  margin-top: var(--space-5);
+  line-height: 1.5;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  animation: slideUp 0.4s ease;
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    padding: var(--space-6) var(--space-5);
+  }
+  .login-brand .mark {
+    font-size: 2rem;
+  }
+}

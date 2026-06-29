@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/login.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="mark">Monika G</span>
+      <span class="tagline">Café Management System</span>
+    </div>
+
+    <div class="login-tabs">
+      <button type="button" class="login-tab active" id="tab-email" onclick="switchTab('email')">Email</button>
+      <button type="button" class="login-tab" id="tab-mobile" onclick="switchTab('mobile')">Mobile</button>
+    </div>
+
+    <!-- EMAIL LOGIN -->
+    <div class="login-panel" id="panel-email">
+      <div id="email-step-request">
+        <div class="field">
+          <label for="email-input">Email address</label>
+          <input type="email" id="email-input" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:8px" id="email-send-otp-btn" onclick="requestEmailOtp()">
+          Send login code
+        </button>
+        <p class="hint" style="margin-top:8px">We'll email you a one-time code — no password needed.</p>
+      </div>
+
+      <div id="email-step-verify" class="hidden">
+        <p class="otp-step-label">Enter the 6-digit code sent to <strong id="email-display"></strong></p>
+        <div class="field">
+          <label for="email-otp-input">Code</label>
+          <div class="otp-input-row">
+            <input type="text" id="email-otp-input" inputmode="numeric" maxlength="6" placeholder="000000">
+          </div>
+        </div>
+        <div class="otp-meta-row">
+          <button class="link-btn" id="email-resend-btn" onclick="requestEmailOtp(true)">Resend code</button>
+          <button class="link-btn" onclick="resetEmailStep()">Different email</button>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:14px" id="email-verify-btn" onclick="verifyEmailOtp()">
+          Verify &amp; sign in
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE LOGIN -->
+    <div class="login-panel hidden" id="panel-mobile">
+      <div id="mobile-step-request">
+        <div class="field">
+          <label for="mobile-input">Mobile number</label>
+          <input type="tel" id="mobile-input" placeholder="+919876543210" autocomplete="tel">
+        </div>
+        <p class="hint">Include your country code (e.g. +91 for India).</p>
+        <button class="btn btn-primary btn-block" style="margin-top:8px" id="mobile-send-otp-btn" onclick="requestMobileOtp()">
+          Send OTP via SMS
+        </button>
+      </div>
+
+      <div id="mobile-step-verify" class="hidden">
+        <p class="otp-step-label">Enter the 6-digit code sent to <strong id="mobile-display"></strong></p>
+        <div class="field">
+          <label for="mobile-otp-input">Code</label>
+          <div class="otp-input-row">
+            <input type="text" id="mobile-otp-input" inputmode="numeric" maxlength="6" placeholder="000000">
+          </div>
+        </div>
+        <div class="otp-meta-row">
+          <button class="link-btn" id="mobile-resend-btn" onclick="requestMobileOtp(true)">Resend code</button>
+          <button class="link-btn" onclick="resetMobileStep()">Different number</button>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:14px" id="mobile-verify-btn" onclick="verifyMobileOtp()">
+          Verify &amp; sign in
+        </button>
+      </div>
+    </div>
+
+    <div class="login-divider">or continue with</div>
+    <div id="google-signin-button"></div>
+
+    <p class="login-footnote">By signing in, you agree to our terms. This is a café management system.</p>
+  </div>
+</div>
+
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

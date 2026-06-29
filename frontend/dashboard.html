@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body">
+
+<nav class="nav-bar"><div id="nav-root"></div></nav>
+
+<div class="page-content">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Today's overview of orders, revenue, and operations.</p>
+  </div>
+
+  <div class="stat-grid" id="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">📦 Orders Today</div>
+      <div class="stat-value" id="stat-orders">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">💰 Revenue Today</div>
+      <div class="stat-value" id="stat-revenue">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">⏳ Pending Orders</div>
+      <div class="stat-value" id="stat-pending">—</div>
+    </div>
+    <div class="stat-card alert">
+      <div class="stat-label">⚠️ Low Stock Items</div>
+      <div class="stat-value" id="stat-lowstock">—</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: var(--space-6);">
+    <h2>Top Sellers This Month</h2>
+    <div class="table-wrap" style="border:none; margin-top: var(--space-4)">
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Units Sold</th>
+            <th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody id="top-items-body">
+          <tr><td colspan="3" class="empty-state">Loading data…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

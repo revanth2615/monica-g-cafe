@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body">
+<nav class="nav-bar"><div id="nav-root"></div></nav>
+<div class="page-content">
+  <div class="page-header">
+    <h1>Browse & Order</h1>
+    <p>Pick your favorites — your cart is on the right.</p>
+  </div>
+  <div id="customer-menu-grid" class="menu-grid"><div class="empty-state">Loading menu…</div></div>
+</div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header"><span>Your Order</span><span id="cart-count" class="text-muted" style="font-size:0.8rem">0</span></div>
+  <div class="cart-items" id="cart-items"><p class="text-muted" style="font-size:0.85rem">Empty</p></div>
+  <div class="cart-footer">
+    <div class="flex justify-between" style="margin-bottom:10px"><strong>Total</strong><strong id="cart-total">₹0.00</strong></div>
+    <button class="btn btn-primary btn-block" onclick="placeOrder()" id="place-order-btn" disabled>Place Order</button>
+  </div>
+</div>
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/customer-menu.js"></script>
+</body>
+</html>

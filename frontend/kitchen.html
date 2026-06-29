@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchen Queue — Monika G Cafe</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/app.css">
+<style>
+  .kitchen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-5); }
+</style>
+</head>
+<body class="app-body">
+<nav class="nav-bar"><div id="nav-root"></div></nav>
+<div class="page-content">
+  <div class="page-header">
+    <h1>Kitchen Queue</h1>
+    <p>Active orders ready for preparation.</p>
+  </div>
+  <div id="kitchen-grid" class="kitchen-grid"><div class="empty-state">Loading…</div></div>
+</div>
+<div id="toast-root"></div>
+<script src="js/api.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/kitchen.js"></script>
+</body>
+</html>
